@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Download, Send, Bookmark, Share2 } from "lucide-react";
+import { Download, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
 
-// Local Custom Brand Icon SVGs
-const Facebook = (props: React.SVGProps<SVGSVGElement>) => (
+// Local Custom Brand Icon SVGs (Original Logos)
+const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
@@ -17,6 +17,42 @@ const Facebook = (props: React.SVGProps<SVGSVGElement>) => (
     className={props.className}
   >
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={props.className}
+  >
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
+const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={props.className}
+  >
+    <path d="M12.012 2c-5.506 0-9.988 4.482-9.988 9.988 0 1.761.461 3.479 1.336 5.001L2 22l5.161-1.353a9.928 9.928 0 004.851 1.258c5.506 0 9.988-4.482 9.988-9.988S17.518 2 12.012 2zm6.657 14.15c-.273.76-1.572 1.393-2.154 1.46-.576.066-1.152.099-3.794-.972-3.379-1.371-5.556-4.805-5.722-5.025-.165-.22-1.336-1.781-1.336-3.398 0-1.617.842-2.409 1.142-2.723.303-.314.66-.39.882-.39.223 0 .446.002.639.01.2.009.472-.076.739.566.273.66.936 2.278 1.018 2.443.085.165.14.359.031.576-.11.217-.165.348-.33.543-.165.195-.349.435-.498.583-.165.165-.337.348-.146.678.192.33.855 1.409 1.83 2.278.855.76 1.572 1.023 1.902 1.188.33.165.528.14.72-.083.195-.22.842-.98.1.066-1.12.839-1.516.924-2.228.085-.712-.132-2.82-.94-5.111-2.986-1.761-1.583-2.946-2.399-4.225-2.399-.576 0-1.152.073-1.657.435z" />
+  </svg>
+);
+
+const TelegramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={props.className}
+  >
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .24z" />
   </svg>
 );
 
@@ -115,6 +151,13 @@ export default function Footer() {
       shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + " " + url)}`;
     } else if (platform === "telegram") {
       shareUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+    } else if (platform === "instagram") {
+      // Fallback action for Instagram: Copy link to clipboard
+      if (typeof navigator !== "undefined" && navigator.clipboard) {
+        navigator.clipboard.writeText(url);
+        alert("LX-Downloader link copied to clipboard! Share it on your Instagram Story or DM.");
+        return;
+      }
     }
     
     if (shareUrl) {
@@ -156,27 +199,34 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <Share2 className="w-4 h-4 text-blue-500" />
             <span className="text-sm font-bold text-slate-700">{t.shareText}</span>
-            <div className="flex items-center gap-2 ml-1">
+            <div className="flex items-center gap-2.5 ml-1">
               <button
                 onClick={() => handleShare("facebook")}
-                className="w-8 h-8 rounded-lg bg-white hover:bg-blue-600/25 hover:text-blue-600 flex items-center justify-center transition-all duration-200 hover:shadow active:scale-90 cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-white text-slate-500 hover:bg-blue-600/15 hover:text-blue-600 flex items-center justify-center transition-all duration-200 hover:shadow active:scale-90 cursor-pointer"
                 aria-label="Share on Facebook"
               >
-                <Facebook className="w-4 h-4" />
+                <FacebookIcon className="w-4.5 h-4.5" />
               </button>
               <button
                 onClick={() => handleShare("whatsapp")}
-                className="w-8 h-8 rounded-lg bg-white hover:bg-emerald-600/25 hover:text-emerald-600 flex items-center justify-center transition-all duration-200 hover:shadow active:scale-90 cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-white text-slate-500 hover:bg-emerald-600/15 hover:text-emerald-600 flex items-center justify-center transition-all duration-200 hover:shadow active:scale-90 cursor-pointer"
                 aria-label="Share on WhatsApp"
               >
-                <Send className="w-4 h-4 rotate-45" />
+                <WhatsappIcon className="w-4.5 h-4.5" />
               </button>
               <button
                 onClick={() => handleShare("telegram")}
-                className="w-8 h-8 rounded-lg bg-white hover:bg-blue-500/25 hover:text-blue-500 flex items-center justify-center transition-all duration-200 hover:shadow active:scale-90 cursor-pointer"
+                className="w-8 h-8 rounded-lg bg-white text-slate-500 hover:bg-sky-500/15 hover:text-sky-500 flex items-center justify-center transition-all duration-200 hover:shadow active:scale-90 cursor-pointer"
                 aria-label="Share on Telegram"
               >
-                <Bookmark className="w-4 h-4" />
+                <TelegramIcon className="w-4.5 h-4.5" />
+              </button>
+              <button
+                onClick={() => handleShare("instagram")}
+                className="w-8 h-8 rounded-lg bg-white text-slate-500 hover:bg-pink-600/15 hover:text-pink-600 flex items-center justify-center transition-all duration-200 hover:shadow active:scale-90 cursor-pointer"
+                aria-label="Share on Instagram"
+              >
+                <InstagramIcon className="w-4.5 h-4.5" />
               </button>
             </div>
           </div>
