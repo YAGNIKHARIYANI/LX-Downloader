@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { 
-  Flame, Link2, Play, Download, RefreshCw, Film, Image as ImageIcon, Compass, UserCheck, Search, X, ChevronDown
+  Flame, Link2, Play, Download, RefreshCw, Film, Image as ImageIcon, Compass, UserCheck, Search, X, ChevronDown, AlertCircle, CheckCircle, Loader2, User, UserX, Sparkles, Lock, ExternalLink, Clock
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -44,7 +44,7 @@ const VOCABULARY: Record<string, Record<string, any>> = {
   en: { 
     instagramText: "DOWNLOAD ALL INSTAGRAM STUFF HERE!", 
     youtubeText: "DOWNLOAD ALL YOUTUBE VIDEOS & AUDIO HERE!", 
-    pastePlaceholder: "Paste valid link here...", 
+    pastePlaceholder: "Paste link or enter @username (e.g. https://... or @natgeo)", 
     searchBtn: "SEARCH", 
     pasteBtn: "Paste", 
     howTo: "How to Save Content in 3 Steps", 
@@ -104,7 +104,7 @@ const VOCABULARY: Record<string, Record<string, any>> = {
   hi: { 
     instagramText: "यहाँ सभी इंस्टाग्राम सामग्री डाउनलोड करें!", 
     youtubeText: "यहाँ सभी यूट्यूब वीडियो और ऑडियो डाउनलोड करें!", 
-    pastePlaceholder: "वैध लिंक यहाँ पेस्ट करें...", 
+    pastePlaceholder: "लिंक पेस्ट करें या @यूज़रनेम दर्ज करें (उदा. https://... या @natgeo)", 
     searchBtn: "खोजें", 
     pasteBtn: "पेस्ट", 
     howTo: "3 आसान चरणों में डाउनलोड करें", 
@@ -164,7 +164,7 @@ const VOCABULARY: Record<string, Record<string, any>> = {
   bn: { 
     instagramText: "এখানে সমস্ত ইনস্টাগ্রাম মিডিয়া ডাউনলোড করুন!", 
     youtubeText: "এখানে সমস্ত ইউটিউব ভিডিও ও অডিও ডাউনলোড করুন!", 
-    pastePlaceholder: "সঠিক লিঙ্কটি এখানে পেস্ট করুন...", 
+    pastePlaceholder: "লিঙ্ক পেস্ট করুন অথবা @ইউজারনেম লিখুন (যেমন https://... বা @handle)", 
     searchBtn: "অনুসন্ধান", 
     pasteBtn: "পেস্ট", 
     howTo: "৩টি সহজ ধাপে ডাউনলোড করুন", 
@@ -206,7 +206,7 @@ const VOCABULARY: Record<string, Record<string, any>> = {
       },
       highlight: {
         title: "ইনস্টাগ্রাম হাইলাইট ডাউনলোড",
-        text1: "প্রোফাইলের হাইলাইট স্টোরিগুলো সরাসরি উচ্চ রেজোলিউশনে সেভ করে নিন।",
+        text1: "প্রোফাইলের হাইলাইট স্টোরিগুলো সরাসরি उच्च রেজোলিউশনে সেভ করে নিন।",
         text2: "হাইলাইটের লিঙ্ক দিন এবং সমস্ত ছবি ও ভিডিও একসাথে সেভ করুন।"
       },
       youtubeVideo: {
@@ -224,7 +224,7 @@ const VOCABULARY: Record<string, Record<string, any>> = {
   te: { 
     instagramText: "ఇక్కడ అన్ని ఇన్‌స్టాగ్రామ్ మీడియా డౌన్‌లోడ్ చేసుకోండి!", 
     youtubeText: "ఇక్కడ అన్ని యూట్యూబ్ వీడియోలను డౌన్‌లోడ్ చేయండి!", 
-    pastePlaceholder: "లింక్ ఇక్కడ అతికించండి...", 
+    pastePlaceholder: "లింక్ అతికించండి లేదా @యూజర్‌నేమ్ నమోదు చేయండి (ఉదా. https://... లేదా @handle)", 
     searchBtn: "శోధించండి", 
     pasteBtn: "అతికించు", 
     howTo: "3 దశల్లో కంటెంట్ సేవ్ చేయండి", 
@@ -284,7 +284,7 @@ const VOCABULARY: Record<string, Record<string, any>> = {
   kn: {
     instagramText: "ಇಲ್ಲಿ ಎಲ್ಲಾ ಇನ್‌ಸ್ಟಾಗ್ರಾಮ್ ಮಾಧ್ಯಮಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ!",
     youtubeText: "ಇಲ್ಲಿ ಎಲ್ಲಾ ಯೂಟ್ಯೂಬ್ ವೀಡಿಯೊಗಳನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ!",
-    pastePlaceholder: "ಲಿಂಕ್ ಅನ್ನು ಇಲ್ಲಿ ಅಂಟಿಸಿ...",
+    pastePlaceholder: "ಲಿಂಕ್ ಅಂಟಿಸಿ ಅಥವಾ @ಬಳಕೆದಾರ ಹೆಸರು ನಮೂದಿಸಿ (ಉದಾ. https://... ಅಥವಾ @handle)",
     searchBtn: "ಹುಡುಕಿ",
     pasteBtn: "ಅಂಟಿಸಿ",
     howTo: "3 ಸುಲಭ ಹಂತಗಳಲ್ಲಿ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
@@ -344,7 +344,7 @@ const VOCABULARY: Record<string, Record<string, any>> = {
   ml: {
     instagramText: "എല്ലാ ഇൻസ്റ്റാഗ്രാം മീഡിയയും ഇവിടെ ഡൗൺലോഡ് ചെയ്യുക!",
     youtubeText: "എല്ലാ യൂറ്റ്യൂബ് വീഡിയോകളും ഇവിടെ ഡൗൺലോഡ് ചെയ്യുക!",
-    pastePlaceholder: "ലിങ്ക് ഇവിടെ ഒട്ടിക്കുക...",
+    pastePlaceholder: "ലിങ്ക് ഒട്ടിക്കുക അല്ലെങ്കിൽ @യൂസർനെയിം നൽകുക (ഉദാ. https://... അല്ലെങ്കിൽ @handle)",
     searchBtn: "തിരയുക",
     pasteBtn: "ഒട്ടിക്കുക",
     howTo: "3 ലളിതമായ ഘട്ടങ്ങളിലൂടെ സേവ് ചെയ്യാം",
@@ -404,7 +404,7 @@ const VOCABULARY: Record<string, Record<string, any>> = {
   mr: {
     instagramText: "येथे सर्व इंस्टाग्राम मीडिया डाउनलोड करा!",
     youtubeText: "येथे सर्व यूट्यूब व्हिडिओ डाउनलोड करा!",
-    pastePlaceholder: "लिंक येथे पेस्ट करा...",
+    pastePlaceholder: "येथे लिंक पेस्ट करा किंवा @वापरकर्ता नाव टाका (उदा. https://... किंवा @handle)",
     searchBtn: "शोधा",
     pasteBtn: "पेस्ट करा",
     howTo: "3 सोप्या पायऱ्यांमध्ये डाउनलोड करा",
@@ -489,15 +489,12 @@ export default function Home() {
   const [platform, setPlatform] = useState<"instagram" | "youtube">("instagram");
   
   // Level 2: Sub-tab selection (Instagram: Reels, Post, Story, DP, Highlight; YouTube: Video, Shorts)
-  const [subTab, setSubTab] = useState<string>("reels");
+  // Null by default so no option is pre-selected
+  const [subTab, setSubTab] = useState<string | null>(null);
 
-  // Reset sub-tab when parent platform changes
+  // Reset sub-tab to null when parent platform changes so no tab is pre-selected
   useEffect(() => {
-    if (platform === "youtube") {
-      setSubTab("youtubeVideo");
-    } else {
-      setSubTab("reels");
-    }
+    setSubTab(null);
   }, [platform]);
 
   const [inputUrl, setInputUrl] = useState("");
@@ -506,11 +503,31 @@ export default function Home() {
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("Analyzing Link...");
   const [result, setResult] = useState<any>(null);
+  const [downloading, setDownloading] = useState(false);
+  const [downloadingOption, setDownloadingOption] = useState<string | null>(null);
+  const [downloadProgress, setDownloadProgress] = useState<number | null>(null);
+  const [downloadCompleted, setDownloadCompleted] = useState(false);
+  const [hasDownloaded, setHasDownloaded] = useState(false);
+  const [downloadStatusText, setDownloadStatusText] = useState("");
+  const [showIframePreview, setShowIframePreview] = useState(false);
+  const [profileFilter, setProfileFilter] = useState<"all" | "reels" | "post" | "story" | "highlight" | "dp">("all");
+  const [stepsMethod, setStepsMethod] = useState<"link" | "username">("link");
+  const [previewStreamUrl, setPreviewStreamUrl] = useState<string | null>(null);
+  const [previewError, setPreviewError] = useState(false);
+  const [modalItem, setModalItem] = useState<any>(null);
+  const [modalStreamUrl, setModalStreamUrl] = useState<string | null>(null);
   
   // Set first FAQ open by default (index 0) matching user screenshot
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const downloaderRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Reset media preview fallbacks whenever result changes
+  useEffect(() => {
+    setPreviewStreamUrl(null);
+    setPreviewError(false);
+  }, [result]);
 
   // Client-side query parameters parsing (avoids React Suspense bailout)
   const [langCode, setLangCode] = useState("en");
@@ -525,80 +542,215 @@ export default function Home() {
     return () => window.removeEventListener("popstate", parseLang);
   }, [pathname]);
 
-  // Clear states when subTab changes
-  useEffect(() => {
+  const handlePlatformClick = (newPlatform: "instagram" | "youtube") => {
+    setPlatform(newPlatform);
+    setSubTab(null);
     setInputUrl("");
     setErrorMsg("");
     setResult(null);
-  }, [subTab]);
+    setHasDownloaded(false);
+  };
 
-  // Trigger search simulation directly (used on immediate paste click)
-  const triggerSearchDirect = (url: string) => {
-    const trimmed = url.trim().toLowerCase();
+  const handleSubTabClick = (tabId: string) => {
+    // Toggle: if already selected, clicking it again unselects it (sets to null)
+    const nextTab = subTab === tabId ? null : tabId;
+    setSubTab(nextTab);
+    setErrorMsg("");
+    setHasDownloaded(false);
+    if (result && result.type === "profile") {
+      if (nextTab === "post" || nextTab === "reels" || nextTab === "story" || nextTab === "highlight" || nextTab === "dp") {
+        setProfileFilter(nextTab as any);
+      } else {
+        setProfileFilter("all");
+      }
+    }
+  };
+
+  const formatDuration = (seconds?: number) => {
+    if (!seconds || seconds <= 0) return "";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${s < 10 ? "0" : ""}${s}`;
+  };
+
+  // Trigger real search extraction directly against the Python backend
+  const triggerSearchDirect = async (url: string) => {
+    const trimmed = url.trim();
+    if (!trimmed) {
+      setErrorMsg("Please paste a valid URL link.");
+      return;
+    }
     
-    // Quick validation
-    if (platform === "youtube") {
-      if (!trimmed.includes("youtube.com") && !trimmed.includes("youtu.be")) {
-        setErrorMsg("Please enter a valid YouTube link.");
-        return;
+    // Smart auto-detection of platform, subTab, and Instagram username
+    const lower = trimmed.toLowerCase();
+    const isYt = lower.includes("youtube.com") || lower.includes("youtu.be");
+    const isIg = lower.includes("instagram.com");
+    const isUsername = trimmed.startsWith("@") || (/^[a-zA-Z0-9._]{1,30}$/.test(trimmed) && !lower.includes(".com") && !lower.includes(".org") && !lower.includes(".net") && !lower.includes("/") && !lower.includes("?"));
+
+    if (isYt) {
+      if (platform !== "youtube") setPlatform("youtube");
+      if (lower.includes("/shorts/")) {
+        if (subTab !== "youtubeShorts") setSubTab("youtubeShorts");
+      } else {
+        if (subTab !== "youtubeVideo") setSubTab("youtubeVideo");
       }
+    } else if (isIg) {
+      if (platform !== "instagram") setPlatform("instagram");
+      const isReel = lower.includes("/reel/") || lower.includes("/reels/");
+      const isPost = lower.includes("/p/");
+      const isHighlight = lower.includes("/stories/highlights/") || lower.includes("/highlights/");
+      const isStory = lower.includes("/stories/") && !isHighlight;
+
+      if (isReel && subTab !== "reels") setSubTab("reels");
+      else if (isPost && subTab !== "post") setSubTab("post");
+      else if (isHighlight && subTab !== "highlight") setSubTab("highlight");
+      else if (isStory && subTab !== "story") setSubTab("story");
+    } else if (isUsername) {
+      if (platform !== "instagram") setPlatform("instagram");
     } else {
-      if (!trimmed.includes("instagram.com") && trimmed.includes("http")) {
-        setErrorMsg("Please enter a valid Instagram link.");
-        return;
-      }
+      setErrorMsg("Please enter a valid Instagram or YouTube link, or an Instagram @username.");
+      return;
     }
 
     setErrorMsg("");
     setLoading(true);
-    setProgress(0);
+    setProgress(15);
     setResult(null);
+    setShowIframePreview(false);
 
-    // Simulate progress loader
-    const interval = setInterval(() => {
+    const connectingText = isUsername 
+      ? `Fetching Instagram profile for ${trimmed}...`
+      : (langCode === "hi" ? "सर्वर से कनेक्ट हो रहा है..." : "Connecting to media server...");
+    const parsingText = isUsername
+      ? `Extracting Reels, Posts, Stories & Highlights...`
+      : (langCode === "hi" ? "मीडिया स्ट्रीम पार्स की जा रही है..." : "Parsing video stream...");
+    const fetchingText = langCode === "hi" ? "डाउनलोड विवरण प्राप्त हो रहे हैं..." : "Fetching download details...";
+
+    setLoadingText(connectingText);
+
+    // Smooth progress simulation while backend extracts
+    const progressTimer = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setLoading(false);
-            setResult(MOCK_RESULTS[platform]);
-          }, 300);
-          return 100;
+        if (prev < 80) return prev + Math.floor(Math.random() * 12) + 5;
+        return prev;
+      });
+    }, 200);
+
+    try {
+      setTimeout(() => setLoadingText(parsingText), 600);
+      
+      const response = await fetch(`/api/py/extract?url=${encodeURIComponent(trimmed)}`);
+      
+      let data: any = null;
+      try {
+        data = await response.json();
+      } catch {
+        throw new Error(
+          `Server returned an invalid response (${response.status}). Please check your connection or try again.`
+        );
+      }
+
+      clearInterval(progressTimer);
+      setProgress(95);
+      setLoadingText(fetchingText);
+
+      if (!response.ok || !data || !data.success) {
+        throw new Error(
+          (data && data.detail) || "Unable to extract media. Please verify that the account or post is public."
+        );
+      }
+
+      setProgress(100);
+      setTimeout(() => {
+        setLoading(false);
+        setShowIframePreview(false);
+        setHasDownloaded(false);
+        setDownloadCompleted(false);
+        
+        // Automatically sync profile filter to active subTab (e.g. Post -> only posts, Reels -> only reels, DP -> only DP)
+        if (subTab === "post" || subTab === "reels" || subTab === "story" || subTab === "highlight" || subTab === "dp") {
+          setProfileFilter(subTab as any);
+        } else {
+          setProfileFilter("all");
         }
 
-        const next = prev + Math.floor(Math.random() * 25) + 12;
-        const currentProgress = Math.min(next, 100);
+        if (data.type === "profile") {
+          setResult(data);
+        } else {
+          setResult({
+            platform: data.platform || (isYt ? "youtube" : "instagram"),
+            video_id: data.video_id || "",
+            user: data.author || (isYt ? "YouTube Creator" : "Instagram Creator"),
+            avatar: data.avatar || data.thumbnail,
+            thumbnail: data.thumbnail || data.avatar || "",
+            type: data.type || "video",
+            title: data.title,
+            duration: data.duration,
+            download_url: data.download_url,
+            options: data.options || [],
+            items: [
+              {
+                id: "1",
+                type: data.type,
+                url: data.thumbnail || data.avatar,
+                tag: data.title,
+                download_url: data.download_url,
+              }
+            ]
+          });
+        }
+      }, 300);
 
-        const dict = VOCABULARY[langCode] || VOCABULARY.en;
-        const connectingText = langCode === "ar" ? "جاري الاتصال..." : langCode === "es" ? "Conectando..." : "Connecting to CDN...";
-        const parsingText = langCode === "ar" ? "جاري معالجة الفيديو..." : langCode === "es" ? "Procesando..." : "Parsing video stream...";
-        const fetchingText = langCode === "ar" ? "جاري جلب الملفات..." : langCode === "es" ? "Obteniendo..." : "Fetching file details...";
-
-        if (currentProgress < 30) setLoadingText(connectingText);
-        else if (currentProgress < 65) setLoadingText(parsingText);
-        else setLoadingText(fetchingText);
-
-        return currentProgress;
-      });
-    }, 100);
+    } catch (err: any) {
+      clearInterval(progressTimer);
+      setLoading(false);
+      setErrorMsg(err.message || "Failed to download media. Please ensure the Python backend is running.");
+    }
   };
 
   const handlePaste = async () => {
     try {
-      const text = await navigator.clipboard.readText();
-      if (text) {
-        setInputUrl(text);
-        // IMMEDIATE ACTION: start download fetch instantly on paste
-        triggerSearchDirect(text);
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        const text = await navigator.clipboard.readText();
+        if (text && text.trim()) {
+          setInputUrl(text.trim());
+          triggerSearchDirect(text.trim());
+          return;
+        }
       }
-    } catch (err) {
-      setErrorMsg("Failed to read clipboard. Please paste link manually.");
+    } catch {
+      // Gracefully ignore permission rejection and focus input instead of showing alert error
+    }
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   };
 
   const handleClear = () => {
     setInputUrl("");
     setErrorMsg("");
+    setResult(null);
+    setShowIframePreview(false);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  const handleClearResult = () => {
+    setResult(null);
+    setInputUrl("");
+    setErrorMsg("");
+    setShowIframePreview(false);
+    setDownloading(false);
+    setDownloadingOption(null);
+    setDownloadProgress(null);
+    setDownloadCompleted(false);
+    setHasDownloaded(false);
+    setDownloadStatusText("");
+    setProfileFilter("all");
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const handleDownloadSubmit = (e: React.FormEvent) => {
@@ -610,47 +762,205 @@ export default function Home() {
     triggerSearchDirect(inputUrl);
   };
 
-  const triggerDownloadAction = (itemName: string) => {
-    alert(`LX-Downloader mock download trigger: "${itemName}" is being saved to your device in High Definition.`);
+  const triggerDownloadAction = async (downloadUrl?: string, filename?: string, optId?: string) => {
+    const url = downloadUrl || result?.download_url || result?.items?.[0]?.download_url;
+    if (!url) {
+      alert("Download stream link is currently processing. Please try again.");
+      return;
+    }
+
+    setDownloading(true);
+    setDownloadCompleted(false);
+    setDownloadProgress(null);
+    setDownloadStatusText("Downloading media... Please do not leave or close the page!");
+    if (optId) setDownloadingOption(optId);
+    
+    const title = filename || result?.title || result?.items?.[0]?.tag || "LX_Media_Download";
+    const ext = url.includes(".mp3") || optId === "audio" ? "mp3" : (url.includes(".jpg") || url.includes(".png") || result?.type?.toLowerCase().includes("image") ? "jpg" : "mp4");
+    const cleanFilename = `${title.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 50)}.${ext}`;
+
+    // Call the Python backend proxy endpoint with quality selection and native attachment download
+    let proxyDownloadUrl = "";
+    if (url.startsWith("/api/download") || url.startsWith("/api/py/download") || url.startsWith("/download")) {
+      const query = url.includes("?") ? url.split("?")[1] : "";
+      const params = new URLSearchParams(query);
+      if (!params.get("filename")) params.set("filename", cleanFilename);
+      if (optId && !params.get("quality")) params.set("quality", optId);
+      proxyDownloadUrl = `/api/py/download?${params.toString()}`;
+    } else {
+      let endpointParams = `url=${encodeURIComponent(url)}&filename=${encodeURIComponent(cleanFilename)}`;
+      if (optId) endpointParams += `&quality=${encodeURIComponent(optId)}`;
+      if (result?.platform) endpointParams += `&source=${encodeURIComponent(result.platform)}`;
+      if (result?.video_id) endpointParams += `&video_id=${encodeURIComponent(result.video_id)}`;
+      proxyDownloadUrl = `/api/py/download?${endpointParams}`;
+    }
+
+    try {
+      const res = await fetch(proxyDownloadUrl);
+      if (!res.ok) {
+        throw new Error(`Download request failed with status ${res.status}`);
+      }
+
+      const reader = res.body?.getReader();
+      const contentLength = +(res.headers.get("Content-Length") || 0);
+      let receivedLength = 0;
+      const chunks: Uint8Array[] = [];
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          if (value) {
+            chunks.push(value);
+            receivedLength += value.length;
+            if (contentLength > 0) {
+              const pct = Math.min(99, Math.round((receivedLength / contentLength) * 100));
+              setDownloadProgress(pct);
+              setDownloadStatusText(`Downloading: ${pct}%... Please do not leave the page!`);
+            }
+          }
+        }
+      } else {
+        const blob = await res.blob();
+        chunks.push(new Uint8Array(await blob.arrayBuffer()));
+      }
+
+      const mimeType = ext === "mp3" ? "audio/mpeg" : (ext === "jpg" ? "image/jpeg" : "video/mp4");
+      const finalBlob = new Blob(chunks as any[], { type: mimeType });
+      const blobUrl = window.URL.createObjectURL(finalBlob);
+
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = cleanFilename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      setTimeout(() => window.URL.revokeObjectURL(blobUrl), 10000);
+
+      setDownloading(false);
+      setDownloadingOption(null);
+      setDownloadProgress(null);
+      setDownloadCompleted(true);
+      setHasDownloaded(true);
+      setDownloadStatusText("Download Completed! Video saved successfully.");
+
+      // Auto-revert completed status after 5s
+      setTimeout(() => {
+        setDownloadCompleted(false);
+        setDownloadStatusText("");
+      }, 5000);
+
+    } catch (err) {
+      console.warn("Direct blob stream failed, fallback to native download link:", err);
+      const fallbackLink = document.createElement("a");
+      fallbackLink.href = proxyDownloadUrl;
+      fallbackLink.download = cleanFilename;
+      fallbackLink.target = "_blank";
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      document.body.removeChild(fallbackLink);
+
+      setDownloading(false);
+      setDownloadingOption(null);
+      setDownloadProgress(null);
+      setDownloadCompleted(true);
+      setHasDownloaded(true);
+      setDownloadStatusText("Download Completed! File saved successfully.");
+
+      setTimeout(() => {
+        setDownloadCompleted(false);
+        setDownloadStatusText("");
+      }, 5000);
+    }
   };
 
   // Get active localization vocabulary
   const d = VOCABULARY[langCode] || VOCABULARY.en;
   
+  // Default platform descriptions when no sub-tab is selected
+  const defaultPlatformTexts = platform === "youtube"
+    ? {
+        title: langCode === "hi" ? "यूट्यूब वीडियो और शॉर्ट्स डाउनलोडर" : "YouTube Video & Shorts Downloader",
+        text1: langCode === "hi" ? "यूट्यूब से कोई भी वीडियो, शॉर्ट्स या ऑडियो आसानी से डाउनलोड करें।" : "Download YouTube Videos and Shorts in 1080p, 720p, 480p, 360p or MP3 format.",
+        text2: langCode === "hi" ? "ऊपर दिए गए बॉक्स में कोई भी यूट्यूब लिंक पेस्ट करें और तुरंत डाउनलोड करें।" : "Paste any YouTube link in the search bar above to fetch and save your media."
+      }
+    : {
+        title: langCode === "hi" ? "इंस्टाग्राम रील्स, पोस्ट, स्टोरी और डीपी डाउनलोडर" : "Instagram Reels, Posts, Stories & Highlights Downloader",
+        text1: langCode === "hi" ? "इंस्टाग्राम से कोई भी रील, पोस्ट फोटो, स्टोरी या प्रोफाइल डीपी एचडी क्वालिटी में डाउनलोड करें।" : "Download Instagram Reels, Posts, Stories, DP, and Highlights in high definition.",
+        text2: langCode === "hi" ? "ऊपर दिए गए बॉक्स में लिंक पेस्ट करें या @username लिखकर सर्च करें।" : "Paste any Instagram link or enter an @username to view and download all media."
+      };
+
   // Get active tab descriptions and details from localized dictionary
-  const fallbackTexts = VOCABULARY.en.tabTexts[subTab] || VOCABULARY.en.tabTexts.reels;
-  const desc = d.tabTexts ? (d.tabTexts[subTab] || fallbackTexts) : fallbackTexts;
+  const activeTabTexts = subTab && d.tabTexts ? (d.tabTexts[subTab] || VOCABULARY.en.tabTexts[subTab]) : null;
+  const desc = activeTabTexts || defaultPlatformTexts;
 
   // Fallback to English steps/faqs if the selected language does not define them
   const steps = d.steps || VOCABULARY.en.steps;
   const faqs = d.faqs || VOCABULARY.en.faqs;
 
+  const linkSteps = [
+    {
+      num: "01",
+      title: "Copy Media Link",
+      desc: "Open Instagram or YouTube, choose any Reel, Video, Shorts, Post or Story, tap Share and Copy Link."
+    },
+    {
+      num: "02",
+      title: "Paste into LX-Downloader",
+      desc: "Paste the copied URL into the input box above. Our intelligent parser automatically identifies the media."
+    },
+    {
+      num: "03",
+      title: "Pick Quality & Download",
+      desc: "Select your desired resolution (1080p Full HD, 720p, 480p, 360p, or MP3) and click Download Now."
+    }
+  ];
+
+  const usernameSteps = [
+    {
+      num: "01",
+      title: "Enter Instagram @username",
+      desc: "Type or paste any Instagram profile username (e.g. @natgeo or cristiano) into the search bar above."
+    },
+    {
+      num: "02",
+      title: "Browse Profile Media",
+      desc: "Our engine retrieves the profile, organizing all public Stories, Reels, Posts, and Highlights with counts."
+    },
+    {
+      num: "03",
+      title: "Download Any Item or HD DP",
+      desc: "Filter by category to download any video/photo directly, or grab the original high-resolution Profile DP."
+    }
+  ];
+
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 overflow-x-hidden transition-colors duration-300">
+    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-900 overflow-x-clip transition-colors duration-300">
       {/* Downloader Section */}
-      <section className="relative pt-10 pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[600px] h-[350px] md:h-[600px] bg-gradient-to-tr from-blue-600/10 to-indigo-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16 max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 text-center w-full">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] md:w-[600px] h-[300px] sm:h-[500px] md:h-[600px] bg-gradient-to-tr from-blue-600/10 to-indigo-600/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
         {/* Brand Tagline */}
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/5 text-blue-600 text-xs font-bold mb-8">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/5 text-blue-600 text-[11px] sm:text-xs font-bold mb-6 sm:mb-8">
           <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
           100% Free & Unlimited Downloader
         </div>
 
         {/* Downloader panel box (Completely BORDERLESS, shadow-based card) */}
-        <div ref={downloaderRef} id="downloader" className="scroll-mt-24 max-w-5xl mx-auto">
+        <div ref={downloaderRef} id="downloader" className="scroll-mt-20 sm:scroll-mt-24 max-w-5xl mx-auto">
           
           {/* LEVEL 1 PLATFORM TABS: INSTAGRAM vs YOUTUBE */}
-          <div className="grid grid-cols-2 bg-white rounded-t-3xl overflow-hidden shadow-xl shadow-slate-100 relative">
+          <div className="grid grid-cols-2 bg-white rounded-t-2xl sm:rounded-t-3xl overflow-hidden shadow-xl shadow-slate-100 relative">
             
             {/* Instagram Tab */}
             <button
-              onClick={() => setPlatform("instagram")}
-              className={`relative py-5 flex items-center justify-center gap-2.5 font-extrabold text-sm sm:text-base tracking-wide transition-all active:scale-[0.98] cursor-pointer outline-none z-10 ${
+              onClick={() => handlePlatformClick("instagram")}
+              className={`relative py-4 sm:py-5 flex items-center justify-center gap-2 sm:gap-2.5 font-extrabold text-xs sm:text-base tracking-wide transition-all active:scale-[0.98] cursor-pointer outline-none z-10 ${
                 platform === "instagram" ? "text-blue-600" : "text-slate-500"
               }`}
             >
-              <InstagramIcon className="w-5 h-5" />
+              <InstagramIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               INSTAGRAM
               
               {platform === "instagram" && (
@@ -664,12 +974,12 @@ export default function Home() {
 
             {/* YouTube Tab */}
             <button
-              onClick={() => setPlatform("youtube")}
-              className={`relative py-5 flex items-center justify-center gap-2.5 font-extrabold text-sm sm:text-base tracking-wide transition-all active:scale-[0.98] cursor-pointer outline-none z-10 ${
+              onClick={() => handlePlatformClick("youtube")}
+              className={`relative py-4 sm:py-5 flex items-center justify-center gap-2 sm:gap-2.5 font-extrabold text-xs sm:text-base tracking-wide transition-all active:scale-[0.98] cursor-pointer outline-none z-10 ${
                 platform === "youtube" ? "text-blue-600" : "text-slate-500"
               }`}
             >
-              <YoutubeIcon className="w-5 h-5" />
+              <YoutubeIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               YOUTUBE
 
               {platform === "youtube" && (
@@ -683,14 +993,14 @@ export default function Home() {
           </div>
 
           {/* Level 2 Subpanel (Borderless shadow card) */}
-          <div className="bg-slate-100 backdrop-blur-md p-6 md:p-10 rounded-b-3xl shadow-xl shadow-slate-100/60 relative overflow-hidden transition-colors duration-300">
+          <div className="bg-slate-100 backdrop-blur-md p-4 sm:p-6 md:p-10 rounded-b-2xl sm:rounded-b-3xl shadow-xl shadow-slate-100/60 relative overflow-hidden transition-colors duration-300">
             {/* Header Text */}
-            <span className="block text-xs font-black tracking-widest text-blue-600 mb-6 text-center select-none uppercase">
+            <span className="block text-[10px] sm:text-xs font-black tracking-widest text-blue-600 mb-4 sm:mb-6 text-center select-none uppercase">
               {platform === "instagram" ? d.instagramText : d.youtubeText}
             </span>
 
             {/* LEVEL 2 SUBTABS */}
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <AnimatePresence mode="wait">
                 {platform === "instagram" ? (
                   /* Instagram Subtabs: Reels, Post, Story, DP, Highlight */
@@ -699,7 +1009,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -5 }}
-                    className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 animate-fade-in"
+                    className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 animate-fade-in"
                   >
                     {[
                       { id: "reels", label: "Reels", icon: Film },
@@ -709,18 +1019,20 @@ export default function Home() {
                       { id: "highlight", label: "Highlight", icon: Download }
                     ].map((tab) => {
                       const Icon = tab.icon;
+                      const isSelected = subTab === tab.id;
                       return (
                         <button
                           key={tab.id}
-                          onClick={() => setSubTab(tab.id)}
-                          className={`flex items-center justify-center gap-2 py-3 px-6 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 cursor-pointer ${
-                            subTab === tab.id
-                              ? "bg-white text-blue-600 shadow-md"
-                              : "bg-white/40 text-slate-650 hover:bg-white"
+                          type="button"
+                          onClick={() => handleSubTabClick(tab.id)}
+                          className={`flex items-center justify-center gap-1.5 sm:gap-2 py-2 px-3 sm:py-3 sm:px-6 rounded-xl sm:rounded-2xl text-[11px] sm:text-xs font-bold transition-all duration-200 active:scale-95 cursor-pointer ${
+                            isSelected
+                              ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-[1.02]"
+                              : "bg-white/70 hover:bg-white text-slate-700 hover:text-slate-900 border border-slate-200/80 shadow-xs"
                           }`}
                         >
-                          <Icon className="w-4 h-4" />
-                          {tab.label}
+                          <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isSelected ? "text-white" : "text-slate-500"}`} />
+                          <span>{tab.label}</span>
                         </button>
                       );
                     })}
@@ -732,25 +1044,27 @@ export default function Home() {
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -5 }}
-                    className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 animate-fade-in"
+                    className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 animate-fade-in"
                   >
                     {[
                       { id: "youtubeVideo", label: "Video", icon: Play },
                       { id: "youtubeShorts", label: "Shorts", icon: Film }
                     ].map((tab) => {
                       const Icon = tab.icon;
+                      const isSelected = subTab === tab.id;
                       return (
                         <button
                           key={tab.id}
-                          onClick={() => setSubTab(tab.id)}
-                          className={`flex items-center justify-center gap-2 py-3 px-6 rounded-2xl text-xs font-bold transition-all duration-200 active:scale-95 cursor-pointer ${
-                            subTab === tab.id
-                              ? "bg-white text-blue-600 shadow-md"
-                              : "bg-white/40 text-slate-655 hover:bg-white"
+                          type="button"
+                          onClick={() => handleSubTabClick(tab.id)}
+                          className={`flex items-center justify-center gap-1.5 sm:gap-2 py-2 px-4 sm:py-3 sm:px-6 rounded-xl sm:rounded-2xl text-[11px] sm:text-xs font-bold transition-all duration-200 active:scale-95 cursor-pointer ${
+                            isSelected
+                              ? "bg-blue-600 text-white shadow-md shadow-blue-500/25 scale-[1.02]"
+                              : "bg-white/70 hover:bg-white text-slate-700 hover:text-slate-900 border border-slate-200/80 shadow-xs"
                           }`}
                         >
-                          <Icon className="w-4 h-4" />
-                          {tab.label}
+                          <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isSelected ? "text-white" : "text-slate-500"}`} />
+                          <span>{tab.label}</span>
                         </button>
                       );
                     })}
@@ -760,7 +1074,7 @@ export default function Home() {
             </div>
 
             {/* Sub-tab Dynamic Title */}
-            <h2 className="text-xl sm:text-2xl font-black text-slate-905 mb-6">
+            <h2 className="text-lg sm:text-2xl font-black text-slate-900 mb-4 sm:mb-6">
               {desc.title}
             </h2>
 
@@ -768,38 +1082,42 @@ export default function Home() {
             <div className="max-w-4xl mx-auto">
               <form
                 onSubmit={handleDownloadSubmit}
-                className="flex flex-col sm:flex-row gap-3 items-stretch"
+                className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 items-stretch"
               >
-                <div className="relative flex-grow bg-white rounded-2xl shadow-inner flex items-center pr-3">
-                  <div className="pl-4 text-slate-400 pointer-events-none shrink-0">
-                    <Link2 className="w-5 h-5" />
+                <div className="relative flex-1 bg-white rounded-2xl shadow-inner flex items-center px-3.5 py-1 sm:py-0 transition-all border border-slate-200/80 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20">
+                  <div className="text-slate-400 pointer-events-none shrink-0 pr-2">
+                    <Link2 className="w-5 h-5 text-blue-600/70" />
                   </div>
                   <input
+                    ref={inputRef}
                     type="text"
                     value={inputUrl}
                     onChange={(e) => setInputUrl(e.target.value)}
                     placeholder={d.pastePlaceholder}
-                    className="block w-full pl-3 pr-16 py-4 text-sm sm:text-base text-slate-855 placeholder-slate-400 bg-transparent border-0 ring-0 focus:outline-none focus:ring-0"
+                    className="flex-1 min-w-0 py-3.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 bg-transparent border-0 ring-0 focus:outline-none focus:ring-0"
                   />
 
-                  {/* Actions in input container */}
-                  <div className="flex items-center gap-1">
-                    {inputUrl && (
+                  {/* Context-aware Actions: If link exists, show Clear (X); if empty, show Paste button */}
+                  <div className="flex items-center shrink-0 pl-1.5">
+                    {inputUrl ? (
                       <button
                         type="button"
                         onClick={handleClear}
-                        className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+                        className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all active:scale-95 cursor-pointer"
+                        title="Clear link"
+                        aria-label="Clear link"
                       >
                         <X className="w-4 h-4" />
                       </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={handlePaste}
+                        className="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 text-xs font-bold transition-all cursor-pointer active:scale-95"
+                      >
+                        {d.pasteBtn}
+                      </button>
                     )}
-                    <button
-                      type="button"
-                      onClick={handlePaste}
-                      className="px-2.5 py-1.5 rounded-lg bg-slate-105 text-slate-605 hover:text-blue-600 text-xs font-bold transition-all cursor-pointer active:scale-95 shrink-0"
-                    >
-                      {d.pasteBtn}
-                    </button>
                   </div>
                 </div>
 
@@ -807,21 +1125,45 @@ export default function Home() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="py-4 px-8 rounded-2xl bg-blue-600 hover:bg-blue-600 text-white font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-md shadow-blue-500/10 active:scale-95 transition-all cursor-pointer shrink-0"
+                  className="py-3.5 px-6 rounded-xl sm:rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-500/20 active:scale-95 transition-all cursor-pointer shrink-0"
                 >
                   {loading ? (
-                    <RefreshCw className="w-5 h-5 animate-spin" />
+                    <RefreshCw className="w-4.5 h-4.5 animate-spin" />
                   ) : (
-                    <Search className="w-5 h-5" />
+                    <Search className="w-4.5 h-4.5" />
                   )}
                   {d.searchBtn}
                 </button>
               </form>
 
               {errorMsg && (
-                <p className="text-red-500 text-xs font-bold text-left mt-2 pl-1">
-                  {errorMsg}
-                </p>
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className={`mt-4 p-4 rounded-2xl border text-left shadow-sm max-w-xl mx-auto flex items-start gap-3.5 ${
+                    errorMsg.includes("No such user found") || errorMsg.includes("આવો કોઈ યુઝર નથી")
+                      ? "bg-amber-50/95 border-amber-300 text-amber-950 shadow-amber-500/5"
+                      : "bg-red-50 border-red-200/80 text-red-700"
+                  }`}
+                >
+                  {errorMsg.includes("No such user found") || errorMsg.includes("આવો કોઈ યુઝર નથી") ? (
+                    <div className="w-10 h-10 rounded-xl bg-amber-200/80 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
+                      <UserX className="w-5 h-5" />
+                    </div>
+                  ) : (
+                    <AlertCircle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                  )}
+                  <div className="flex-1 space-y-1">
+                    <h4 className="text-xs sm:text-sm font-black tracking-tight">
+                      {errorMsg.includes("No such user found") || errorMsg.includes("આવો કોઈ યુઝર નથી")
+                        ? "User Not Found (આવો કોઈ યુઝર નથી)"
+                        : "Download Notice"}
+                    </h4>
+                    <p className="text-xs sm:text-sm font-medium leading-relaxed opacity-90">
+                      {errorMsg}
+                    </p>
+                  </div>
+                </motion.div>
               )}
             </div>
 
@@ -855,10 +1197,10 @@ export default function Home() {
                       />
                     </svg>
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-xs font-black text-slate-855">{progress}%</span>
+                      <span className="text-xs font-black text-slate-800">{progress}%</span>
                     </div>
                   </div>
-                  <h3 className="text-xs font-bold text-slate-650 flex items-center gap-1.5">
+                  <h3 className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
                     <RefreshCw className="w-3.5 h-3.5 animate-spin text-blue-600" />
                     {loadingText}
                   </h3>
@@ -866,104 +1208,705 @@ export default function Home() {
               )}
             </AnimatePresence>
 
-            {/* Dynamic Results Card Panel */}
+            {/* Dynamic Results Card Panel - Clean Full Video Player & Profile Browser */}
             <AnimatePresence>
               {result && !loading && (
                 <motion.div
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -15 }}
-                  className="mt-8 p-4 sm:p-6 bg-white rounded-2xl text-left max-w-4xl mx-auto shadow-2xl shadow-slate-100"
+                  className={`mt-8 p-4 sm:p-6 bg-white rounded-3xl text-center ${result.type === "profile" ? "max-w-4xl" : "max-w-lg"} mx-auto shadow-2xl shadow-slate-100 flex flex-col items-center gap-5`}
                 >
-                  {/* Account detail */}
-                  <div className="flex items-center justify-between pb-4 mb-6">
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={result.avatar}
-                        alt={result.user}
-                        className="w-12 h-12 rounded-full border-2 border-blue-600 object-cover shadow-sm"
-                      />
-                      <div>
-                        <h4 className="text-sm sm:text-base font-extrabold text-slate-900">@{result.user}</h4>
-                        <span className="text-xs text-slate-550">{platform === "instagram" ? d.mockUser : d.mockYoutubeUser}</span>
+                  {result.type === "profile" ? (
+                    <div className="w-full flex flex-col items-center gap-5">
+                      {/* User Profile Header */}
+                      <div className="w-full flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 p-4 rounded-2xl bg-gradient-to-br from-slate-50 to-blue-50/40 border border-slate-100">
+                        <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+                          <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full p-1 bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 shadow-md shrink-0">
+                            <img
+                              src={result.avatar || result.thumbnail}
+                              alt={result.username}
+                              className="w-full h-full rounded-full object-cover bg-white"
+                              onError={(e: any) => {
+                                e.currentTarget.src = result.thumbnail || "";
+                              }}
+                            />
+                          </div>
+                          <div className="flex flex-col">
+                            <div className="flex items-center justify-center sm:justify-start gap-2 flex-wrap">
+                              <h2 className="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+                                @{result.username}
+                              </h2>
+                              {result.is_verified && (
+                                <span className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
+                              )}
+                              {result.is_private && (
+                                <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-xs font-black flex items-center gap-1 border border-amber-300/60 shadow-xs">
+                                  <Lock className="w-3 h-3 text-amber-700" />
+                                  <span>Private Account</span>
+                                </span>
+                              )}
+                            </div>
+                            {result.full_name && (
+                              <p className="text-sm font-semibold text-slate-700 mt-0.5">{result.full_name}</p>
+                            )}
+                            {result.bio && (
+                              <p className="text-xs text-slate-600 mt-1 max-w-md line-clamp-2 leading-relaxed">{result.bio}</p>
+                            )}
+                            <div className="flex items-center justify-center sm:justify-start gap-2.5 mt-2 text-xs text-slate-500 font-bold flex-wrap">
+                              {result.follower_count && (
+                                <span className="bg-slate-100 px-2 py-0.5 rounded-md text-slate-700">{result.follower_count} Followers</span>
+                              )}
+                              {result.following_count && (
+                                <span className="bg-slate-100 px-2 py-0.5 rounded-md text-slate-700">{result.following_count} Following</span>
+                              )}
+                              {result.post_count && (
+                                <span className="bg-slate-100 px-2 py-0.5 rounded-md text-slate-700">{result.post_count} Posts</span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Direct Download HD DP Button */}
+                        <button
+                          disabled={downloading}
+                          onClick={() => triggerDownloadAction(result.thumbnail || result.download_url, `${result.username}_HD_DP`, "dp")}
+                          className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20 flex items-center gap-2 cursor-pointer shrink-0"
+                        >
+                          <Download className="w-3.5 h-3.5" />
+                          <span>Download HD DP</span>
+                        </button>
+                      </div>
+
+                      {/* Real-time Status Alert */}
+                      <AnimatePresence>
+                        {downloading && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -6 }}
+                            className="w-full p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs sm:text-sm font-bold flex flex-col items-center gap-2 text-center shadow-sm"
+                          >
+                            <div className="flex items-center gap-2 text-amber-800">
+                              <Loader2 className="w-4 h-4 animate-spin shrink-0 text-amber-600" />
+                              <span>Downloading media... Please wait, do not leave this page!</span>
+                            </div>
+                            {downloadProgress !== null && (
+                              <div className="w-full bg-amber-200/70 rounded-full h-2 overflow-hidden mt-1">
+                                <div
+                                  className="bg-amber-600 h-2 rounded-full transition-all duration-300"
+                                  style={{ width: `${downloadProgress}%` }}
+                                />
+                              </div>
+                            )}
+                          </motion.div>
+                        )}
+
+                        {downloadCompleted && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -6 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -6 }}
+                            className="w-full p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 text-center shadow-sm animate-fade-in"
+                          >
+                            <CheckCircle className="w-4.5 h-4.5 text-emerald-600 shrink-0" />
+                            <span>✅ Download Completed! Video / Image has been saved to your device.</span>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Interactive Category Tabs: Story, Reels, Post, Highlight */}
+                      {(() => {
+                        const reelsCount = result.items?.filter((i: any) => i.category === "reels").length || (result.has_reels ? "Active" : 0);
+                        const postsCount = result.post_count || result.items?.filter((i: any) => i.category === "post").length || 0;
+                        const storiesCount = result.items?.filter((i: any) => i.category === "story").length || (result.has_story ? "Active" : 0);
+                        const highlightsCount = result.items?.filter((i: any) => i.category === "highlight").length || (result.highlight_count !== null && result.highlight_count !== undefined ? result.highlight_count : 0);
+                        
+                        const totalMediaCount = result.is_private 
+                          ? (result.post_count || 0)
+                          : (result.items?.filter((i: any) => i.category !== "dp").length || result.post_count || 0);
+
+                        const filterTabs = [
+                          { id: "all", label: "All Media", count: totalMediaCount },
+                          { id: "dp", label: "DP", count: 1 },
+                          { id: "reels", label: "Reels", count: reelsCount },
+                          { id: "post", label: "Posts", count: postsCount },
+                          { id: "story", label: "Stories", count: storiesCount },
+                          { id: "highlight", label: "Highlights", count: highlightsCount },
+                        ];
+
+                        const currentFiltered = profileFilter === "all"
+                          ? (result.items?.filter((i: any) => i.category !== "dp") || [])
+                          : (result.items?.filter((i: any) => i.category === profileFilter) || []);
+
+                        return (
+                          <div className="w-full flex flex-col gap-4">
+                            {/* Tabs bar */}
+                            <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-2xl bg-slate-100 border border-slate-200/60">
+                              {filterTabs.map((tab) => (
+                                <button
+                                  key={tab.id}
+                                  onClick={() => {
+                                    setProfileFilter(tab.id as any);
+                                    if (tab.id === "all") {
+                                      setSubTab(null);
+                                    } else {
+                                      setSubTab(tab.id);
+                                    }
+                                  }}
+                                  className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                                    profileFilter === tab.id
+                                      ? "bg-white text-blue-600 shadow-sm border border-slate-200/80"
+                                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/50"
+                                  }`}
+                                >
+                                  <span>{tab.label}</span>
+                                  <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-black ${
+                                    profileFilter === tab.id ? "bg-blue-100 text-blue-700" : "bg-slate-200/80 text-slate-600"
+                                  }`}>
+                                    {tab.count}
+                                  </span>
+                                </button>
+                              ))}
+                            </div>
+
+                            {/* View 1: DP ONLY VIEW */}
+                            {profileFilter === "dp" ? (
+                              <div className="py-8 px-4 sm:px-8 rounded-3xl bg-white border border-slate-200/80 shadow-md text-center flex flex-col items-center justify-center gap-5 max-w-xl mx-auto animate-fade-in w-full">
+                                <div className="relative group">
+                                  <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-3xl overflow-hidden p-1.5 bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 shadow-xl">
+                                    <img
+                                      src={result.thumbnail || result.avatar || result.download_url}
+                                      alt={`${result.username} HD DP`}
+                                      className="w-full h-full object-cover rounded-2xl bg-slate-900 group-hover:scale-105 transition-transform duration-300"
+                                      onError={(e: any) => {
+                                        e.currentTarget.src = result.avatar || "";
+                                      }}
+                                    />
+                                  </div>
+                                  <span className="absolute bottom-3 right-3 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md text-white font-black text-[10px] tracking-wider uppercase shadow-md">
+                                    1080p HD
+                                  </span>
+                                </div>
+
+                                <div className="space-y-1">
+                                  <div className="flex items-center justify-center gap-2">
+                                    <h3 className="text-lg sm:text-xl font-black text-slate-900">
+                                      @{result.username}
+                                    </h3>
+                                    {result.is_verified && (
+                                      <span className="w-4 h-4 rounded-full bg-blue-500 text-white flex items-center justify-center text-[10px] font-bold">✓</span>
+                                    )}
+                                  </div>
+                                  {result.full_name && (
+                                    <p className="text-xs sm:text-sm font-semibold text-slate-600">{result.full_name}</p>
+                                  )}
+                                  <p className="text-[11px] font-bold text-blue-600 bg-blue-50 py-1 px-3 rounded-full inline-block mt-1 border border-blue-200">
+                                    ✨ Original Full-Size High Definition Profile Picture
+                                  </p>
+                                </div>
+
+                                {/* Direct Action Buttons for DP */}
+                                <div className="w-full flex flex-col sm:flex-row gap-3 items-center justify-center max-w-md">
+                                  <button
+                                    disabled={downloading}
+                                    onClick={() => triggerDownloadAction(result.thumbnail || result.download_url, `${result.username}_FullHD_DP`, "dp")}
+                                    className="w-full sm:flex-1 py-3 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-black text-xs sm:text-sm transition-all shadow-md shadow-blue-600/25 flex items-center justify-center gap-2 cursor-pointer"
+                                  >
+                                    <Download className="w-4 h-4" />
+                                    <span>DOWNLOAD FULL HD DP</span>
+                                  </button>
+                                  <a
+                                    href={result.thumbnail || result.download_url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="w-full sm:w-auto py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 border border-slate-200 transition-all"
+                                  >
+                                    <ExternalLink className="w-4 h-4" />
+                                    <span>View Full Size</span>
+                                  </a>
+                                </div>
+
+                                {/* Quick switch links */}
+                                <div className="pt-3 border-t border-slate-100 w-full flex items-center justify-center gap-2 text-xs text-slate-500 flex-wrap">
+                                  <span>Also browse @{result.username}&apos;s:</span>
+                                  <button
+                                    onClick={() => { setProfileFilter("reels"); setSubTab("reels"); }}
+                                    className="font-bold text-blue-600 hover:underline"
+                                  >
+                                    Reels ({reelsCount})
+                                  </button>
+                                  <span>•</span>
+                                  <button
+                                    onClick={() => { setProfileFilter("post"); setSubTab("post"); }}
+                                    className="font-bold text-blue-600 hover:underline"
+                                  >
+                                    Posts ({postsCount})
+                                  </button>
+                                  <span>•</span>
+                                  <button
+                                    onClick={() => { setProfileFilter("all"); setSubTab(null); }}
+                                    className="font-bold text-blue-600 hover:underline"
+                                  >
+                                    All Media ({totalMediaCount})
+                                  </button>
+                                </div>
+                              </div>
+                            ) : profileFilter === "story" && currentFiltered.length === 0 ? (
+                              /* View 2: Empty Active Stories Notice (No Instagram Redirect) */
+                              <div className="py-10 px-5 sm:px-8 rounded-3xl bg-slate-50 border border-slate-200 text-center flex flex-col items-center justify-center gap-3.5 max-w-xl mx-auto w-full animate-fade-in">
+                                <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center shadow-inner">
+                                  <Clock className="w-6 h-6" />
+                                </div>
+                                <div className="space-y-1">
+                                  <h3 className="text-sm sm:text-base font-black text-slate-800">
+                                    No Active 24-Hour Stories for @{result.username}
+                                  </h3>
+                                  <p className="text-xs text-slate-500 leading-relaxed max-w-md">
+                                    Instagram stories disappear automatically after 24 hours. @{result.username} has no active stories at this moment.
+                                  </p>
+                                </div>
+                                <div className="flex flex-wrap items-center justify-center gap-2 mt-1">
+                                  <button
+                                    type="button"
+                                    onClick={() => { setProfileFilter("reels"); setSubTab("reels"); }}
+                                    className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
+                                  >
+                                    <Film className="w-3.5 h-3.5" />
+                                    <span>Browse Available Reels ({reelsCount})</span>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => { setProfileFilter("post"); setSubTab("post"); }}
+                                    className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
+                                  >
+                                    <span>Browse Posts ({postsCount})</span>
+                                  </button>
+                                </div>
+                              </div>
+                            ) : profileFilter === "highlight" && currentFiltered.length === 0 ? (
+                              /* View 3: Empty Highlights Notice (No Instagram Redirect) */
+                              <div className="py-10 px-5 sm:px-8 rounded-3xl bg-slate-50 border border-slate-200 text-center flex flex-col items-center justify-center gap-3.5 max-w-xl mx-auto w-full animate-fade-in">
+                                <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center shadow-inner">
+                                  <Sparkles className="w-6 h-6" />
+                                </div>
+                                <div className="space-y-1">
+                                  <h3 className="text-sm sm:text-base font-black text-slate-800">
+                                    No Saved Highlights Found for @{result.username}
+                                  </h3>
+                                  <p className="text-xs text-slate-500 leading-relaxed max-w-md">
+                                    @{result.username} currently does not have any public story highlights pinned on their profile.
+                                  </p>
+                                </div>
+                                <div className="flex flex-wrap items-center justify-center gap-2 mt-1">
+                                  <button
+                                    type="button"
+                                    onClick={() => { setProfileFilter("reels"); setSubTab("reels"); }}
+                                    className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
+                                  >
+                                    <Film className="w-3.5 h-3.5" />
+                                    <span>Browse Available Reels ({reelsCount})</span>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => { setProfileFilter("post"); setSubTab("post"); }}
+                                    className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
+                                  >
+                                    <span>Browse Posts ({postsCount})</span>
+                                  </button>
+                                </div>
+                              </div>
+                            ) : result.is_private ? (
+                              /* View 4: Private Account Message */
+                              <div className="py-10 px-6 rounded-3xl bg-slate-50 border border-slate-200 text-center flex flex-col items-center justify-center gap-3.5">
+                                <div className="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center shadow-inner">
+                                  <Lock className="w-7 h-7" />
+                                </div>
+                                <div className="max-w-md space-y-1.5">
+                                  <h3 className="text-base sm:text-lg font-black text-slate-800">
+                                    This Account is Private
+                                  </h3>
+                                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                                    @{result.username} has set their profile to private. Follow them on Instagram to see their {profileFilter === "reels" ? "reels" : profileFilter === "post" ? "posts" : "photos and videos"}.
+                                  </p>
+                                  <p className="text-[11px] font-bold text-amber-800 bg-amber-100/70 py-1.5 px-3 rounded-lg inline-block mt-2 border border-amber-200">
+                                    🔒 Note: Media downloads are only supported for public accounts. Public HD DP is available above.
+                                  </p>
+                                </div>
+                                <button
+                                  disabled={downloading}
+                                  onClick={() => triggerDownloadAction(result.thumbnail || result.download_url, `${result.username}_HD_DP`, "dp")}
+                                  className="mt-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-md shadow-blue-600/20 flex items-center gap-2 cursor-pointer"
+                                >
+                                  <Download className="w-4 h-4" />
+                                  <span>Download Public HD DP</span>
+                                </button>
+                              </div>
+                            ) : currentFiltered.length === 0 ? (
+                              /* View 5: Empty Media Grid */
+                              <div className="py-10 px-5 sm:px-8 rounded-3xl bg-slate-50 border border-slate-200 text-center flex flex-col items-center justify-center gap-3.5 max-w-xl mx-auto">
+                                <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center shadow-inner">
+                                  <Film className="w-6 h-6" />
+                                </div>
+                                <div className="space-y-2">
+                                  <h3 className="text-sm sm:text-base font-black text-slate-800">
+                                    No public {profileFilter} available for @{result.username}
+                                  </h3>
+                                  <p className="text-xs text-slate-600 leading-relaxed">
+                                    Try selecting &apos;All Media&apos; or &apos;Reels&apos; to download available public content.
+                                  </p>
+                                </div>
+
+                                <button
+                                  type="button"
+                                  onClick={() => { setProfileFilter("reels"); setSubTab("reels"); }}
+                                  className="mt-1 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
+                                >
+                                  <Film className="w-3.5 h-3.5" />
+                                  <span>Browse Available Reels ({reelsCount})</span>
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="flex flex-col gap-3 w-full">
+                                {profileFilter === "story" && (
+                                  <div className="w-full p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex flex-wrap items-center justify-between gap-2 shadow-xs">
+                                    <div className="flex items-center gap-2">
+                                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0" />
+                                      <span>{currentFiltered.length} Active 24-Hour {currentFiltered.length === 1 ? "Story" : "Stories"} Available for @{result.username}</span>
+                                    </div>
+                                    <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-md">
+                                      Click any story to watch preview
+                                    </span>
+                                  </div>
+                                )}
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
+                                  {currentFiltered.map((item: any) => {
+                                    const isItemDownloading = downloading && downloadingOption === item.id;
+                                    return (
+                                      <div
+                                        key={item.id}
+                                        className="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group"
+                                      >
+                                        <div 
+                                          onClick={() => { setModalItem(item); setModalStreamUrl(null); }}
+                                          className="relative aspect-square bg-slate-900 overflow-hidden cursor-pointer"
+                                        >
+                                          <img
+                                            src={item.thumbnail}
+                                            alt={item.title}
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            onError={(e: any) => {
+                                              e.currentTarget.src = result.avatar || "";
+                                            }}
+                                          />
+                                          <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/75 text-white text-[10px] font-black uppercase tracking-wider backdrop-blur-xs">
+                                            {item.category}
+                                          </div>
+                                          {item.type === "video" && (
+                                            <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/65 text-white group-hover:scale-110 group-hover:bg-blue-600 transition-all">
+                                              <Play className="w-3 h-3 fill-current" />
+                                            </div>
+                                          )}
+                                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                                            <span className="px-3 py-1 rounded-full bg-black/75 text-white text-xs font-bold backdrop-blur-xs">
+                                              {item.type === "video" ? "Watch Video" : "View Photo"}
+                                            </span>
+                                          </div>
+                                        </div>
+
+                                        <div className="p-3.5 flex flex-col gap-2.5">
+                                          <h4 className="text-xs font-bold text-slate-800 line-clamp-2 leading-snug">
+                                            {item.title}
+                                          </h4>
+
+                                          <button
+                                            disabled={downloading}
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              triggerDownloadAction(item.download_url, `${result.username}_${item.category}_${item.id}`, item.id);
+                                            }}
+                                            className={`w-full py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md ${
+                                              isItemDownloading
+                                                ? "bg-blue-400 text-white cursor-not-allowed"
+                                                : "bg-blue-600 hover:bg-blue-700 text-white active:scale-[0.98] shadow-blue-600/20"
+                                            }`}
+                                          >
+                                            {isItemDownloading ? (
+                                              <>
+                                                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                                <span>DOWNLOADING...</span>
+                                              </>
+                                            ) : (
+                                              <>
+                                                <Download className="w-3.5 h-3.5" />
+                                                <span>DOWNLOAD {item.ext?.toUpperCase() || "MEDIA"}</span>
+                                              </>
+                                            )}
+                                          </button>
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })()}
+
+                      {/* Prominent Clear Result Button */}
+                      <button
+                        onClick={handleClearResult}
+                        className="w-full max-w-xs py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-[0.98] text-slate-700 hover:text-slate-900 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200 transition-all cursor-pointer shadow-sm mt-2"
+                      >
+                        <X className="w-4 h-4 text-slate-500" />
+                        <span>{d.clearBtn || "Clear Result"}</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                  {/* Full Playable Video or Full Image Preview */}
+                  {result.platform === "youtube" && result.video_id ? (
+                    <div className="w-full flex flex-col items-center">
+                      {showIframePreview ? (
+                        <div className={`w-full ${subTab === "youtubeShorts" ? "max-w-[280px] sm:max-w-[320px] aspect-[9/16]" : "max-w-md aspect-video"} mx-auto rounded-2xl overflow-hidden bg-black shadow-lg relative`}>
+                          <iframe
+                            src={`https://www.youtube-nocookie.com/embed/${result.video_id}?autoplay=1&rel=0&modestbranding=1`}
+                            title={result.title}
+                            className="w-full h-full border-0 rounded-2xl"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                      ) : (
+                        <div 
+                          onClick={() => setShowIframePreview(true)}
+                          className={`group cursor-pointer w-full ${subTab === "youtubeShorts" ? "max-w-[280px] sm:max-w-[320px] aspect-[9/16]" : "max-w-md aspect-video"} mx-auto rounded-2xl overflow-hidden bg-slate-900 shadow-lg relative flex items-center justify-center`}
+                        >
+                          <img
+                            src={result.thumbnail || result.avatar || `https://i.ytimg.com/vi/${result.video_id}/hqdefault.jpg`}
+                            alt={result.title || "Video Preview"}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            onError={(e: any) => {
+                              e.currentTarget.src = `https://i.ytimg.com/vi/${result.video_id}/hqdefault.jpg`;
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-black/35 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-blue-600/90 text-white flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                              <Play className="w-7 h-7 fill-current translate-x-0.5" />
+                            </div>
+                          </div>
+                          {result.duration ? (
+                            <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/80 text-white text-xs font-bold tracking-wide">
+                              {formatDuration(result.duration)}
+                            </div>
+                          ) : null}
+                        </div>
+                      )}
+
+                      {/* Video Title & Channel Info */}
+                      <div className="mt-3 text-left w-full max-w-md px-1">
+                        <h3 className="text-sm sm:text-base font-bold text-slate-900 line-clamp-2 leading-snug">
+                          {result.title}
+                        </h3>
+                        {result.user && (
+                          <p className="text-xs text-slate-500 mt-1 font-medium flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-red-600 inline-block" />
+                            {result.user}
+                          </p>
+                        )}
                       </div>
                     </div>
+                  ) : (
+                    <div className="w-full max-w-md rounded-2xl overflow-hidden bg-black shadow-lg flex flex-col items-center justify-center relative">
+                      {result.type === "video" || result.download_url?.includes(".mp4") ? (
+                        <video
+                          key={previewStreamUrl || result.download_url}
+                          src={previewStreamUrl || result.download_url}
+                          poster={result.thumbnail || result.avatar}
+                          controls
+                          playsInline
+                          preload="metadata"
+                          {...({ referrerPolicy: "no-referrer" } as any)}
+                          onError={() => {
+                            // If direct CDN stream fails due to CORS or referer policy, switch to backend streaming proxy
+                            if (!previewStreamUrl && result.download_url) {
+                              setPreviewStreamUrl(`/api/py/stream?url=${encodeURIComponent(result.download_url)}`);
+                            } else {
+                              setPreviewError(true);
+                            }
+                          }}
+                          className="w-full max-h-[480px] object-contain mx-auto"
+                        />
+                      ) : (
+                        <img
+                          src={result.download_url || result.thumbnail || result.avatar}
+                          alt="Media Preview"
+                          referrerPolicy="no-referrer"
+                          className="w-full max-h-[480px] object-contain mx-auto"
+                        />
+                      )}
+                      {previewError && (
+                        <div className="p-3 bg-slate-900 w-full text-center text-xs text-slate-300 flex items-center justify-center gap-2">
+                          <span>Preview playback blocked by CDN.</span>
+                          <a
+                            href={`/api/py/stream?url=${encodeURIComponent(result.download_url)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-400 hover:underline font-bold inline-flex items-center gap-1"
+                          >
+                            <span>Open Stream</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Clean Solid Blue Download Now Button & In-Place Realtime Status Indicators */}
+                  <div className="w-full max-w-md flex flex-col gap-3">
+                    
+                    {/* Dynamic Action Button - switches to DOWNLOAD AGAIN after finish */}
                     <button
-                      onClick={() => setResult(null)}
-                      className="px-3.5 py-1.5 rounded-xl bg-slate-105 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all active:scale-95 cursor-pointer"
+                      disabled={downloading}
+                      onClick={() => triggerDownloadAction(result.download_url, result.title)}
+                      className={`w-full py-4 rounded-xl text-white font-black text-sm sm:text-base tracking-wider transition-all cursor-pointer shadow-lg flex items-center justify-center gap-2 group ${
+                        downloading
+                          ? "bg-blue-500 cursor-not-allowed shadow-blue-500/20"
+                          : hasDownloaded
+                          ? "bg-blue-600 hover:bg-blue-700 active:scale-[0.98] shadow-blue-600/25"
+                          : "bg-blue-600 hover:bg-blue-700 active:scale-[0.98] shadow-blue-600/25"
+                      }`}
                     >
-                      {d.clearBtn}
+                      {downloading && !downloadingOption ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          <span>
+                            {downloadProgress ? `DOWNLOADING ${downloadProgress}%...` : "DOWNLOADING... PLEASE WAIT"}
+                          </span>
+                        </>
+                      ) : hasDownloaded ? (
+                        <>
+                          <RefreshCw className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
+                          <span>DOWNLOAD AGAIN</span>
+                        </>
+                      ) : (
+                        <>
+                          <Download className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+                          <span>DOWNLOAD NOW</span>
+                        </>
+                      )}
                     </button>
-                  </div>
 
-                  {/* Media items container */}
-                  <div className="grid grid-cols-1 gap-6 mb-6">
-                    {result.items.map((item: any, idx: number) => (
-                      <div key={item.id} className="relative rounded-2xl overflow-hidden bg-slate-50 flex flex-col sm:flex-row items-stretch shadow-inner">
-                        
-                        {/* Media display left */}
-                        <div className="relative aspect-video sm:w-64 md:w-80 bg-slate-200 flex items-center justify-center shrink-0 overflow-hidden">
-                          <img
-                            src={item.url}
-                            alt={item.tag}
-                            className="w-full h-full object-cover opacity-90"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-
-                          {item.type === "video" && (
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white shadow-md active:scale-90 transition-transform">
-                                <Play className="w-5 h-5 fill-current ml-0.5" />
-                              </div>
+                    {/* IN-PLACE REALTIME STATUS ALERT: "WAIT / DON'T LEAVE" OR "COMPLETED" */}
+                    <AnimatePresence>
+                      {downloading && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs sm:text-sm font-bold flex flex-col items-center gap-2 text-center shadow-sm"
+                        >
+                          <div className="flex items-center gap-2 text-amber-800">
+                            <Loader2 className="w-4 h-4 animate-spin shrink-0 text-amber-600" />
+                            <span>Downloading video... Please wait, do not leave this page!</span>
+                          </div>
+                          {downloadProgress !== null && (
+                            <div className="w-full bg-amber-200/70 rounded-full h-2 overflow-hidden mt-1">
+                              <div
+                                className="bg-amber-600 h-2 rounded-full transition-all duration-300"
+                                style={{ width: `${downloadProgress}%` }}
+                              />
                             </div>
                           )}
+                        </motion.div>
+                      )}
 
-                          <span className="absolute bottom-2.5 left-3 text-[10px] sm:text-xs font-bold text-white px-2.5 py-0.5 rounded bg-black/75">
-                            {result.items.length > 1 ? `Item #${idx + 1}` : result.type}
-                          </span>
+                      {downloadCompleted && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -6 }}
+                          className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 text-center shadow-sm animate-fade-in"
+                        >
+                          <CheckCircle className="w-4.5 h-4.5 text-emerald-600 shrink-0" />
+                          <span>✅ Download Completed! Video has been saved to your device.</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Quality & Format Selection Section */}
+                    {(() => {
+                      const videoOpts = (result.options && result.options.length > 0)
+                        ? result.options
+                        : (result.type === "video" || result.download_url?.includes(".mp4"))
+                        ? [
+                            { id: "1080p", label: "Full HD (1080p)", ext: "mp4", url: result.download_url },
+                            { id: "720p", label: "HD Video (720p)", ext: "mp4", url: result.download_url },
+                            { id: "480p", label: "Medium (480p)", ext: "mp4", url: result.download_url },
+                            { id: "360p", label: "Standard (360p)", ext: "mp4", url: result.download_url },
+                            { id: "audio", label: "Audio Only (MP3)", ext: "mp3", url: result.download_url },
+                          ]
+                        : [];
+
+                      if (videoOpts.length === 0) return null;
+
+                      return (
+                        <div className="w-full mt-2 pt-4 border-t border-slate-100 flex flex-col items-center gap-2.5">
+                          <div className="flex items-center gap-1.5 text-xs font-black text-slate-600 uppercase tracking-wider">
+                            <Film className="w-3.5 h-3.5 text-blue-600" />
+                            <span>Select Quality / Resolution</span>
+                          </div>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 w-full">
+                            {videoOpts.map((opt: any) => {
+                              const isOptDownloading = downloading && downloadingOption === opt.id;
+                              return (
+                                <button
+                                  key={opt.id}
+                                  disabled={downloading}
+                                  onClick={() => triggerDownloadAction(opt.url, (result.title || "Media") + "_" + opt.id, opt.id)}
+                                  className={`p-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95 border flex flex-col items-center justify-center gap-1 text-center ${
+                                    isOptDownloading
+                                      ? "bg-blue-600 text-white border-blue-600 shadow-md"
+                                      : "bg-slate-50 hover:bg-blue-50 hover:text-blue-600 text-slate-700 border-slate-200"
+                                  }`}
+                                >
+                                  <div className="flex items-center gap-1.5 font-black text-xs sm:text-sm">
+                                    {isOptDownloading ? (
+                                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                    ) : (
+                                      <span className="px-1.5 py-0.5 rounded bg-blue-100 text-blue-700 text-[10px] font-black uppercase">
+                                        {opt.ext || "MP4"}
+                                      </span>
+                                    )}
+                                    <span>{opt.id.toUpperCase()}</span>
+                                  </div>
+                                  <span className="text-[11px] opacity-80 font-medium">
+                                    {opt.label}
+                                  </span>
+                                </button>
+                              );
+                            })}
+                          </div>
                         </div>
+                      );
+                    })()}
 
-                        {/* Title details right */}
-                        <div className="p-5 flex flex-col justify-center flex-grow space-y-2">
-                          <span className="text-[10px] uppercase font-black tracking-wider text-blue-600">Media Title</span>
-                          <h4 className="text-sm sm:text-base font-extrabold text-slate-855 leading-normal">
-                            {item.tag}
-                          </h4>
-                          <p className="text-xs text-slate-400">HD MP4 Format &bull; High Definition Resolution parsed successfully.</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* PROMINENT START DOWNLOADING BUTTON */}
-                  <div className="pt-4 border-t border-slate-100">
+                    {/* Prominent, Clearly Visible Clear Result Button */}
                     <button
-                      onClick={() => triggerDownloadAction(result.items[0]?.tag || "LX Media")}
-                      className="w-full py-4.5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 text-white font-black text-sm sm:text-base tracking-wider hover:brightness-105 active:scale-[0.99] transition-all cursor-pointer shadow-lg shadow-blue-500/20 flex items-center justify-center gap-2 group"
+                      onClick={handleClearResult}
+                      className="w-full py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 active:scale-[0.98] text-slate-700 hover:text-slate-900 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border border-slate-200 transition-all cursor-pointer shadow-sm mt-1"
                     >
-                      <Download className="w-5.5 h-5.5 group-hover:translate-y-0.5 transition-transform" />
-                      {d.startDownloadBtn}
+                      <X className="w-4 h-4 text-slate-500" />
+                      <span>{d.clearBtn || "Clear Result"}</span>
                     </button>
-                    
-                    {/* Mirror links */}
-                    <div className="flex gap-2 mt-3">
-                      <button
-                        onClick={() => triggerDownloadAction((result.items[0]?.tag || "LX Media") + " (Server 2)")}
-                        className="w-1/2 py-2.5 rounded-xl bg-slate-105 hover:bg-slate-200 text-slate-650 text-xs font-bold transition-all cursor-pointer active:scale-95 text-center border-0"
-                      >
-                        {d.mirrorBtn} (HD)
-                      </button>
-                      <button
-                        onClick={() => triggerDownloadAction((result.items[0]?.tag || "LX Media") + " (Server 3)")}
-                        className="w-1/2 py-2.5 rounded-xl bg-slate-105 hover:bg-slate-200 text-slate-655 text-xs font-bold transition-all cursor-pointer active:scale-95 text-center border-0"
-                      >
-                        {d.mirrorBtn} (SD)
-                      </button>
-                    </div>
                   </div>
-                </motion.div>
+                </>
               )}
-            </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
           </div>
         </div>
       </section>
@@ -996,25 +1939,56 @@ export default function Home() {
         className="bg-slate-50 border-t border-slate-100 py-16 px-4 sm:px-6 lg:px-8"
       >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3">
               {d.howTo}
             </h2>
+            <p className="text-xs sm:text-sm text-slate-500 mb-6">
+              Select your download method below for step-by-step guidance:
+            </p>
+
+            {/* Dual Methods Switcher */}
+            <div className="inline-flex p-1.5 rounded-2xl bg-white border border-slate-200/80 shadow-sm max-w-md w-full mx-auto">
+              <button
+                type="button"
+                onClick={() => setStepsMethod("link")}
+                className={`flex-1 py-2.5 px-3 sm:px-5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                  stepsMethod === "link"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/25"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+              >
+                <Link2 className="w-4 h-4" />
+                <span>Method 1: By Link (URL)</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setStepsMethod("username")}
+                className={`flex-1 py-2.5 px-3 sm:px-5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2 ${
+                  stepsMethod === "username"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-600/25"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                }`}
+              >
+                <User className="w-4 h-4" />
+                <span>Method 2: By Username</span>
+              </button>
+            </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8">
-            {steps.map((step: any) => (
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8">
+            {(stepsMethod === "link" ? linkSteps : usernameSteps).map((step: any) => (
               <div
                 key={step.num}
-                className="relative w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)] bg-white p-6 sm:p-8 rounded-2xl hover:shadow-lg transition-all duration-300"
+                className="relative w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.333%-22px)] bg-white p-6 sm:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-slate-100"
               >
-                <span className="text-4xl sm:text-5xl font-black text-blue-600/40 absolute top-4 right-6 font-mono select-none">
+                <span className="text-4xl sm:text-5xl font-black text-blue-600/30 absolute top-4 right-6 font-mono select-none">
                   {step.num}
                 </span>
-                <h3 className="text-lg font-bold text-slate-900 mb-3 mt-1 pr-12">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-2.5 mt-1 pr-12">
                   {step.title}
                 </h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
                   {step.desc}
                 </p>
               </div>
@@ -1073,6 +2047,95 @@ export default function Home() {
           </div>
         </div>
       </motion.section>
+
+      {/* In-App Media Preview Modal (Stories, Reels, Posts) */}
+      <AnimatePresence>
+        {modalItem && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+            onClick={() => setModalItem(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-slate-900 border border-slate-700/80 rounded-3xl overflow-hidden max-w-md w-full shadow-2xl flex flex-col relative text-white"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Header */}
+              <div className="p-4 flex items-center justify-between border-b border-slate-800">
+                <div className="flex items-center gap-2 overflow-hidden pr-2">
+                  <span className="px-2 py-0.5 rounded-md bg-blue-600 text-[10px] font-black uppercase tracking-wider shrink-0">
+                    {modalItem.category}
+                  </span>
+                  <h3 className="text-xs sm:text-sm font-bold truncate text-slate-200">
+                    {modalItem.title}
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setModalItem(null)}
+                  className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Media Player */}
+              <div className="relative bg-black aspect-square sm:aspect-[9/16] max-h-[60vh] flex items-center justify-center overflow-hidden">
+                {modalItem.type === "video" || modalItem.download_url?.includes(".mp4") ? (
+                  <video
+                    key={modalStreamUrl || modalItem.download_url}
+                    src={modalStreamUrl || modalItem.download_url}
+                    poster={modalItem.thumbnail}
+                    controls
+                    autoPlay
+                    playsInline
+                    className="w-full h-full object-contain"
+                    onError={() => {
+                      if (!modalStreamUrl && modalItem.download_url) {
+                        setModalStreamUrl(`/api/py/stream?url=${encodeURIComponent(modalItem.download_url)}`);
+                      }
+                    }}
+                  />
+                ) : (
+                  <img
+                    src={modalItem.download_url || modalItem.thumbnail}
+                    alt={modalItem.title}
+                    className="w-full h-full object-contain"
+                  />
+                )}
+              </div>
+
+              {/* Footer / Actions */}
+              <div className="p-4 flex flex-col sm:flex-row gap-2.5 bg-slate-900 border-t border-slate-800">
+                <button
+                  disabled={downloading}
+                  onClick={() => {
+                    triggerDownloadAction(
+                      modalItem.download_url, 
+                      `${result?.username || "instagram"}_${modalItem.category}_${modalItem.id}`, 
+                      modalItem.id
+                    );
+                  }}
+                  className="flex-1 py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>DOWNLOAD {modalItem.ext?.toUpperCase() || "MEDIA"}</span>
+                </button>
+                <button
+                  onClick={() => setModalItem(null)}
+                  className="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs sm:text-sm transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
